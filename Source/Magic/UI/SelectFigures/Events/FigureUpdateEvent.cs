@@ -1,18 +1,16 @@
-﻿using System.Windows;
+﻿using System.Windows.Media.Imaging;
 
 namespace Magic.UI.SelectFigures.Events
 {
 	public class FigureUpdateEvent
 	{
 		public int Id { get; private set; }
-		public Int32Rect SourceRect { get; private set; }
-		public int Rotation { get; private set; }
+		public CroppedBitmap CroppedImage { get; private set; }
 
-		public FigureUpdateEvent(int id, Int32Rect sourceRect, int rotation)
+		public FigureUpdateEvent(int id, CroppedBitmap croppedImage)
 		{
 			Id = id;
-			SourceRect = sourceRect;
-			Rotation = rotation;
+			CroppedImage = croppedImage;
 		}
 	}
 }

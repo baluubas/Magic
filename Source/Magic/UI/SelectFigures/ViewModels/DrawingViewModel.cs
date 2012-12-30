@@ -39,14 +39,10 @@ namespace Magic.UI.SelectFigures.ViewModels
 
 		public void ScaleChanged(Viewbox viewBox)
 		{
-			try
-			{
-				scale = Image.Value.Width/viewBox.ActualWidth;
-			}
-			catch (InvalidOperationException)
-			{
-				// might not be initlized yet.
-			}
+			if(Image.Value == null) 
+				return;
+			
+			scale = Image.Value.Width/viewBox.ActualWidth;
 		}
 
 		public void FigureSelected(FigureSelectedEventArgs arg)
@@ -55,9 +51,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 
 			var figureSelectedEvent = new FigureSelectedEvent(
 				arg.Id,
-				sourceRect,
-				(int)((RotateTransform)Image.Value.Transform).Angle,
-				Image.Value,
+				new CroppedBitmap(Image.Value, sourceRect), 
 				arg.Undo);
 
 			_messageBus.Publish(figureSelectedEvent);
@@ -66,7 +60,8 @@ namespace Magic.UI.SelectFigures.ViewModels
 		public void FigureUpdated(FiguresUpdatedEventArgs arg)
 		{
 			Int32Rect sourceRect = GetSourceRect(arg.Bounds.X, arg.Bounds.Y, arg.Bounds.Width, arg.Bounds.Height);
-			_messageBus.Publish(new FigureUpdateEvent(arg.Id, sourceRect, arg.Rotation));		
+			CroppedBitmap croppedImage = new CroppedBitmap(Image.Value, sourceRect);
+			_messageBus.Publish(new FigureUpdateEvent(arg.Id, croppedImage));		
 		}
 
 		public async void Initialize()

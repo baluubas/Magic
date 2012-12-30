@@ -47,15 +47,14 @@ namespace Magic.UI.SelectFigures.ViewModels
 
 		public void DoneSelectingFigures()
 		{
-		//	_messageBus.Publish(new FigureSelectionDoneEvent(Figures.Select(x => x.Image.Value)));
+			_messageBus.Publish(new FigureSelectionDoneEvent(Figures.Select(x => x.Image.Value)));
 		}
 
 		public void Handle(FigureSelectedEvent message)
 		{
 			var figureViewModel = _container
 				.With(message.Id)
-				.With(message.SourceRect)
-				.With(message.SourceImage)
+				.With(message.CroppedImage)
 				.With(message.Undo)
 				.GetInstance<FigureViewModel>();
 

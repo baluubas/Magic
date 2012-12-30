@@ -20,6 +20,11 @@
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:3.6" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:4.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>			
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="StartOver">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.6" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:4.5" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</UserControl.Resources>
@@ -64,8 +69,8 @@
 				Style="{StaticResource HeaderStyle}" HorizontalAlignment="Left" TextAlignment="Center" />
 
 			<Button 
-				x:Name="SaveSomewhereElse1"
-				Content="Open folder"
+				x:Name="BrowseResult"
+				Content="Browse result"
 				VerticalAlignment="Center" 
 				HorizontalAlignment="Center" 
 				FontFamily="Segoe UI Light"

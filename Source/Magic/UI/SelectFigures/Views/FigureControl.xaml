@@ -75,7 +75,7 @@
 				<Grid>
 					<Image
 						x:Name="Drawing"
-						Source="{Binding Image.Value}" 
+						Source="{Binding Image.Value, Mode=TwoWay}" 
 						RenderOptions.BitmapScalingMode="HighQuality" />
 				</Grid>
 			</Viewbox>
