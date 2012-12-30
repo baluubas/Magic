@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E3F91662-2ACC-4E88-A1C0-AEE695588AC9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Magic</RootNamespace>
+    <AssemblyName>Magic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>5.2.30810.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\packages\Caliburn.Micro.1.4\lib\net40\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Elysium">
+      <HintPath>..\packages\Elysium.Theme.1.5\lib\net45\Elysium.dll</HintPath>
+    </Reference>
+    <Reference Include="Elysium.Design.11.0">
+      <HintPath>..\packages\Elysium.Theme.1.5\lib\net45\Elysium.Design.11.0.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.3.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing">
+      <HintPath>..\packages\Elysium.Theme.1.5\lib\net45\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing.Design">
+      <HintPath>..\packages\Elysium.Theme.1.5\lib\net45\Design\Microsoft.Expression.Drawing.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdParty\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.1.4\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Imaging\GhostscriptPageSizes.cs" />
+    <Compile Include="Imaging\GhostscriptDevices.cs" />
+    <Compile Include="Imaging\GhostscriptPages.cs" />
+    <Compile Include="Imaging\GhostscriptPageSize.cs" />
+    <Compile Include="Imaging\GhostscriptSettings.cs" />
+    <Compile Include="Imaging\GhostscriptWrapper.cs" />
+    <Compile Include="Imaging\IPdfToRasterConverter.cs" />
+    <Compile Include="Imaging\PdfToRasterConverter.cs" />
+    <Compile Include="UI\Helpers\BooleanToVisibilityConverter.cs" />
+    <Compile Include="UI\Helpers\Obserable.cs" />
+    <Compile Include="UI\SelectFigures\Events\FigureUpdateEvent.cs" />
+    <Compile Include="UI\SelectFigures\Events\FigureSelectedEvent.cs" />
+    <Compile Include="UI\SelectFigures\Events\FigureSelectionDoneEvent.cs" />
+    <Compile Include="UI\SelectFigures\Events\UndoFigureEvent.cs" />
+    <Compile Include="UI\SelectFigures\Views\FigureControl.xaml.cs">
+      <DependentUpon>FigureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SelectFigures\Views\FigureSelectedEventArgs.cs" />
+    <Compile Include="UI\SelectFigures\Views\FiguresUpdatedEventArgs.cs" />
+    <Compile Include="UI\SelectFigures\Views\Selection.xaml.cs">
+      <DependentUpon>Selection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SelectFigures\Views\SelectionCanvas.cs" />
+    <Compile Include="UI\SelectFigures\ViewModels\DrawingViewModel.cs" />
+    <Compile Include="UI\SelectFigures\ViewModels\FigureViewModel.cs" />
+    <Compile Include="UI\SelectFigures\Views\SelectFiguresView.xaml.cs">
+      <DependentUpon>SelectFiguresView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SelectFigures\ViewModels\SelectFiguresViewModel.cs" />
+    <Compile Include="UI\SelectInput\FilesSelectedEvent.cs" />
+    <Compile Include="UI\SelectInput\SelectInputView.xaml.cs">
+      <DependentUpon>SelectInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SelectInput\SelectInputViewModel.cs" />
+    <Compile Include="UI\SelectOutput\SelectOutputView.xaml.cs">
+      <DependentUpon>SelectOutputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SelectOutput\SelectOutputViewModel.cs" />
+    <Compile Include="UI\ShellViewModel.cs" />
+    <Compile Include="UI\StartOverEvent.cs" />
+    <Compile Include="UI\WizardSteps.cs" />
+    <Page Include="UI\SelectFigures\Views\FigureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SelectFigures\Views\Selection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SelectOutput\SelectOutputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SelectFigures\Views\SelectFiguresView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SelectInput\SelectInputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bootstrap\StructureMapBootstrapper.cs" />
+    <Compile Include="UI\IShellViewModel.cs" />
+    <Compile Include="UI\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\ThirdParty\gsdll32.dll">
+      <Link>gsdll32.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\fontawesome-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

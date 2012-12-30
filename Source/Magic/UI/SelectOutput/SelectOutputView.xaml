@@ -1,0 +1,85 @@
+﻿<UserControl 
+	x:Class="Magic.UI.SelectOutput.SelectOutputView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+	xmlns:media="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+	mc:Ignorable="d" 
+    d:DesignHeight="562"
+	d:DesignWidth="738">
+	<UserControl.Resources>
+		<Storyboard x:Key="CompletionTransition">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="WaitingPanel">
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CompletedPanel">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.6" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:4.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+
+	<i:Interaction.Triggers>
+		<ei:DataTrigger Binding="{Binding IsSaving.Value}" Value="false">
+			<media:ControlStoryboardAction Storyboard="{StaticResource CompletionTransition}"/>
+		</ei:DataTrigger>
+	</i:Interaction.Triggers>
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+
+		<StackPanel x:Name="WaitingPanel" 
+			VerticalAlignment="Center" 
+			HorizontalAlignment="Center">
+
+			<TextBlock 
+				Text="Hold on - saving figures to your DESKTOP" 
+				TextWrapping="Wrap" 
+				Width="300"
+				Style="{StaticResource HeaderStyle}" HorizontalAlignment="Left" TextAlignment="Center" />
+
+			<ProgressBar 
+				IsEnabled="True"
+				Visibility="{Binding IsSaving.Value, Converter={StaticResource boolToVisibilityConverter}}"
+				Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}"
+				Margin="0,48,0,0"
+				IsIndeterminate="True" />
+		</StackPanel>
+		<StackPanel x:Name="CompletedPanel" 
+			VerticalAlignment="Center" 
+			HorizontalAlignment="Center" Margin="219,141.486">
+
+			<TextBlock 
+				Text="All DONE" 
+				TextWrapping="Wrap" 
+				Width="300"
+				Style="{StaticResource HeaderStyle}" HorizontalAlignment="Left" TextAlignment="Center" />
+
+			<Button 
+				x:Name="SaveSomewhereElse1"
+				Content="Open folder"
+				VerticalAlignment="Center" 
+				HorizontalAlignment="Center" 
+				FontFamily="Segoe UI Light"
+				FontSize="21" Margin="0,48,0,0" />
+		</StackPanel>
+
+		<Button 
+			Visibility="{Binding IsSaving.Value, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter=true}"
+			Grid.Row="1"
+			x:Name="StartOver"
+			Margin="24,24,24,24"
+			HorizontalAlignment="Left"
+			Content="Start over"
+			FontFamily="Segoe UI Light"
+			FontSize="21" />
+	</Grid>
+</UserControl>

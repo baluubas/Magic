@@ -1,0 +1,124 @@
+﻿<UserControl 
+	x:Class="Magic.UI.SelectFigures.Views.FigureControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+	xmlns:metro="clr-namespace:Elysium;assembly=Elysium"
+	xmlns:views="clr-namespace:Magic.UI.SelectFigures.Views"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	mc:Ignorable="d" 
+    d:DesignHeight="300"
+	d:DesignWidth="300">
+
+    <Grid>
+		<Viewbox>
+			<Grid 
+				Width="210"
+				Height="297"
+				Background="White"
+				Visibility="{Binding IsGeneratingImage.Value, Converter={StaticResource boolToVisibilityConverter}}">
+			
+				<StackPanel 	
+					HorizontalAlignment="Center" 
+					VerticalAlignment="Center">
+
+					<TextBlock 
+						Text="Generating..." 
+						Foreground="Gray" 
+						HorizontalAlignment="Center"
+						FontFamily="Segoe UI Light" 
+						FontSize="24"  />
+				
+					<Canvas 
+						Height="100" 
+						Width="77.273"
+						Canvas.Left="0" 
+						Canvas.Top="0">
+					
+						<Canvas.LayoutTransform>
+							<ScaleTransform ScaleX="2" ScaleY="2" CenterX=".5" CenterY=".5" />
+						</Canvas.LayoutTransform>
+
+						<Path 
+							Data="F1M18.1816,77.2734L18.1816,22.7274L45.4546,22.7274L45.4546,36.3634L59.0906,36.3634L59.0906,77.2734z M47.7276,24.3344L57.4846,34.0904L47.7276,34.0904z M47.0616,20.4544L15.9096,20.4544L15.9096,79.5444L61.3646,79.5444L61.3646,34.7564z" 
+							Fill="LightGray" 
+							Height="59.09" 
+							Canvas.Left="15.91" 
+							Stretch="Fill" 
+							Canvas.Top="20.454" 
+							Width="45.455"/>
+						<Path 
+							Data="F1M36.8535,35.8931C36.8245,35.8981,36.7815,35.9071,36.7235,35.9261C36.5905,35.9711,36.4845,36.0431,36.3945,36.2551C36.0465,37.0671,36.3215,38.6101,36.8525,40.2681C37.2925,37.4111,37.0595,36.1981,36.8535,35.8931 M37.5415,47.3501C36.5765,50.6891,35.3015,54.2961,33.9325,57.5611C36.7525,56.4671,39.8215,55.5121,42.7025,54.8341C40.8795,52.7181,39.0585,50.0751,37.5415,47.3501 M47.4085,56.2641C48.5075,57.1091,49.4805,57.5721,50.2005,57.5721C50.5165,57.5721,50.9325,57.4981,51.3485,56.9161C51.5495,56.6331,51.6275,56.4511,51.6585,56.3551C51.4935,56.2681,51.0065,56.0861,49.8065,56.0861C49.1255,56.0861,48.3155,56.1461,47.4085,56.2641 M29.2165,62.2331C26.3315,63.8541,25.1555,65.1861,25.0715,65.9371C25.0575,66.0601,25.0215,66.3881,25.6535,66.8711C25.8545,66.8091,27.0295,66.2721,29.2165,62.2331 M25.6245,69.1521L25.6245,69.1521C25.1545,69.1521,24.7035,69.0001,24.3185,68.7121C22.9125,67.6581,22.7235,66.4841,22.8135,65.6851C23.0585,63.4871,25.7765,61.1861,30.8925,58.8421C32.9225,54.3931,34.8545,48.9111,36.0055,44.3301C34.6595,41.3971,33.3505,37.5931,34.3045,35.3621C34.6385,34.5801,35.2265,34.0301,36.0045,33.7701C36.3125,33.6671,36.6145,33.6151,36.8995,33.6151C37.5805,33.6151,38.1885,33.9131,38.6125,34.4531C39.0105,34.9601,40.2095,36.4891,38.4055,44.0881C40.2245,47.8461,42.8025,51.6751,45.2735,54.2971C47.0425,53.9761,48.5665,53.8131,49.8065,53.8131C51.9205,53.8131,53.2025,54.3071,53.7245,55.3201C54.1565,56.1601,53.9795,57.1421,53.1975,58.2361C52.4455,59.2891,51.4095,59.8451,50.2005,59.8451C48.5575,59.8451,46.6475,58.8071,44.5145,56.7601C40.6835,57.5601,36.2105,58.9881,32.5965,60.5691C31.4675,62.9651,30.3865,64.8931,29.3795,66.3081C27.9985,68.2481,26.8045,69.1521,25.6245,69.1521" 
+							Fill="LightGray" 
+							Height="35.537" 
+							Canvas.Left="22.795" 
+							Stretch="Fill" 
+							Canvas.Top="33.615" 
+							Width="31.16">
+						</Path>
+					</Canvas>				
+			</StackPanel>
+			</Grid>
+		</Viewbox>
+
+		<Grid Visibility="{Binding IsGeneratingImage.Value, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter=true}">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Viewbox 
+				cal:Message.Attach="[Event LayoutUpdated] = [ScaleChanged($source)]">
+				<Grid>
+					<Image
+						x:Name="Drawing"
+						Source="{Binding Image.Value}" 
+						RenderOptions.BitmapScalingMode="HighQuality" />
+				</Grid>
+			</Viewbox>
+
+			<views:SelectionCanvas 
+				x:Name="SelectionCanvas"
+				Cursor="Cross" 
+				Background="Transparent" 
+				HorizontalAlignment="Stretch" 
+				VerticalAlignment="Stretch"
+				cal:Message.Attach="[Event FigureSelected] = [FigureSelected($eventArgs)]; [Event FigureUpdated] = [FigureUpdated($eventArgs)]"  />
+
+			<Border
+				Grid.Column="1" 
+				Width="42" 
+				Margin="0,24,0,0"
+				VerticalAlignment="Top"
+				Background="{Binding Source={x:Static metro:Manager.DefaultAccentBrush}}">
+
+				<StackPanel Margin="6,0,0,0">
+					<Button 
+						Content="&#xF01E;"
+						Width="32"
+						Height="32"
+						MinHeight="0"
+						MinWidth="0"
+						ToolTip="Rotate" 
+						cal:Bind.Model="{Binding ElementName=SelectionCanvas, Path=.}"
+						FontSize="28"
+						Padding="4" 
+						FontFamily="/Magic;component/Fonts/#FontAwesome">
+
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="Click">
+								<cal:ActionMessage MethodName="Rotate">
+									<cal:Parameter Value="{Binding ElementName=Drawing, Path=.}" />
+								</cal:ActionMessage>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+
+					</Button>
+				</StackPanel>
+			</Border>
+		</Grid>
+    </Grid>
+</UserControl>
