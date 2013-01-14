@@ -85,17 +85,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Imaging\GhostscriptPageSizes.cs" />
-    <Compile Include="Imaging\GhostscriptDevices.cs" />
-    <Compile Include="Imaging\GhostscriptPages.cs" />
-    <Compile Include="Imaging\GhostscriptPageSize.cs" />
-    <Compile Include="Imaging\GhostscriptSettings.cs" />
-    <Compile Include="Imaging\GhostscriptWrapper.cs" />
-    <Compile Include="Imaging\IPdfToRasterConverter.cs" />
-    <Compile Include="Imaging\PdfToRasterConverter.cs" />
+    <Compile Include="Imaging\Dimensions.cs" />
+    <Compile Include="Imaging\Figure.cs" />
+    <Compile Include="Imaging\FigureExportBuilder.cs" />
+    <Compile Include="Imaging\FigureThumbnail.cs" />
+    <Compile Include="Imaging\GhostScript\GhostscriptPageSizes.cs" />
+    <Compile Include="Imaging\GhostScript\GhostscriptDevices.cs" />
+    <Compile Include="Imaging\GhostScript\GhostscriptPages.cs" />
+    <Compile Include="Imaging\GhostScript\GhostscriptPageSize.cs" />
+    <Compile Include="Imaging\GhostScript\GhostscriptSettings.cs" />
+    <Compile Include="Imaging\GhostScript\GhostscriptWrapper.cs" />
+    <Compile Include="Imaging\IPdfRasterizer.cs" />
+    <Compile Include="Imaging\OhimImageOutputSettingses.cs" />
+    <Compile Include="Imaging\PageThumbnailSetting.cs" />
+    <Compile Include="Imaging\PdfFile.cs" />
+    <Compile Include="Imaging\PdfPage.cs" />
+    <Compile Include="Imaging\RelativeSelection.cs" />
+    <Compile Include="Imaging\Rotatation.cs" />
+    <Compile Include="Imaging\ImageOutputSetting.cs" />
+    <Compile Include="Imaging\TemporaryBitmapFile.cs" />
+    <Compile Include="Imaging\WipoImageOutputSettingses.cs" />
     <Compile Include="UI\Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="UI\Helpers\Obserable.cs" />
-    <Compile Include="UI\SelectFigures\Events\FigureUpdateEvent.cs" />
+    <Compile Include="UI\SelectFigures\Events\FigureRotatedEvent.cs" />
     <Compile Include="UI\SelectFigures\Events\FigureSelectedEvent.cs" />
     <Compile Include="UI\SelectFigures\Events\FigureSelectionDoneEvent.cs" />
     <Compile Include="UI\SelectFigures\Events\UndoFigureEvent.cs" />
@@ -103,7 +115,7 @@
       <DependentUpon>FigureControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SelectFigures\Views\FigureSelectedEventArgs.cs" />
-    <Compile Include="UI\SelectFigures\Views\FiguresUpdatedEventArgs.cs" />
+    <Compile Include="UI\SelectFigures\Views\PageRotatedEventArgs.cs" />
     <Compile Include="UI\SelectFigures\Views\Selection.xaml.cs">
       <DependentUpon>Selection.xaml</DependentUpon>
     </Compile>
@@ -126,6 +138,7 @@
     <Compile Include="UI\ShellViewModel.cs" />
     <Compile Include="UI\StartOverEvent.cs" />
     <Compile Include="UI\WizardSteps.cs" />
+    <Compile Include="Utilities\LimitedConcurrencyLevelTaskScheduler.cs" />
     <Page Include="UI\SelectFigures\Views\FigureControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

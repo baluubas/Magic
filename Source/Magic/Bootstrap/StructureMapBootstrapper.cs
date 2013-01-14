@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using Caliburn.Micro;
+using Magic.Imaging;
+using Magic.Imaging.GhostScript;
 using Magic.UI;
 using StructureMap;
 
@@ -16,13 +18,17 @@ namespace Magic.Bootstrap
 			var windowManager = new WindowManager();
 
 			_container = new Container(
-				x => x.Scan(
-					scanner =>
+				x =>{
+					 x.Scan(
+						scanner =>
 				    {
 					    scanner.TheCallingAssembly();
 						scanner.AddAllTypesOf<IScreen>();
 					    scanner.WithDefaultConventions();
-				    }));
+				    });
+
+					 x.For<IPdfRasterizer>().Singleton().Use<GhostscriptWrapper>();
+			});
 
 			_container.Inject(typeof(EventAggregator), new EventAggregator());
 			_container.Inject(typeof(IWindowManager), windowManager);

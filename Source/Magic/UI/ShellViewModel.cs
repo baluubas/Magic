@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Media;
 using Caliburn.Micro;
+using Magic.Imaging;
 using Magic.UI.Helpers;
 using Magic.UI.SelectFigures.Events;
 using Magic.UI.SelectFigures.ViewModels;
@@ -18,17 +18,16 @@ namespace Magic.UI
 		IHandle<StartOverEvent>,
 		IHandle<FigureSelectionDoneEvent>
 	{
-		private readonly SelectInputViewModel _input;
 		private readonly IContainer _container;
+		private IContainer _nestedContainer;
+
 		private readonly EventAggregator _messageBus;
 		public WizardSteps[] Steps { get; set; }
 
 		public ShellViewModel(
-			SelectInputViewModel input,
 			IContainer container,
 			EventAggregator messageBus)
 		{
-			_input = input;
 			_container = container;
 			_messageBus = messageBus;
 			DisplayName = "";
@@ -41,36 +40,41 @@ namespace Magic.UI
 				new WizardSteps { IsEnabled = new Observable<bool>(false)},
 				new WizardSteps { IsEnabled = new Observable<bool>(false)}
 			};
-
-			foreach (FontFamily fontFamily in Fonts.GetFontFamilies(new Uri("pack://application:,,,/"), "./Fonts/"))
-			{
-				// Perform action.
-			}
 		}
 
 		protected override void OnInitialize()
 		{
-			ActivateItem(_input);
+			StartOver();
 		}
 
 		public void Handle(FilesSelectedEvent selectedFiles)
 		{
 			Steps[1].IsEnabled.Value = true;
-			var figureViewModel = _container.With(selectedFiles.Files).GetInstance<SelectFiguresViewModel>();
-			ActivateItem(figureViewModel);
+			ActivateItem(_nestedContainer.GetInstance<SelectFiguresViewModel>());
 		}
 
 		public void Handle(StartOverEvent _)
 		{
-			ActivateItem(_input);
+			StartOver();
+		}
+
+		public void StartOver()
+		{
+			if (_nestedContainer != null)
+			{
+				_nestedContainer.Dispose();
+			}
+
+			_nestedContainer = _container.GetNestedContainer();
+
+			ActivateItem(_nestedContainer.GetInstance<SelectInputViewModel>());
 			Steps[1].IsEnabled.Value = false;
 			Steps[2].IsEnabled.Value = false;
 		}
 
 		public void Handle(FigureSelectionDoneEvent @event)
 		{
-			var outputVM = _container.With(@event.Figures).GetInstance<SelectOutputViewModel>();
-			ActivateItem(outputVM);
+			ActivateItem(_nestedContainer.GetInstance<SelectOutputViewModel>());
 			Steps[2].IsEnabled.Value = true;
 		}
 	}

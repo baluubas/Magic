@@ -70,8 +70,7 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<Viewbox 
-				cal:Message.Attach="[Event LayoutUpdated] = [ScaleChanged($source)]">
+			<Viewbox>
 				<Grid>
 					<Image
 						x:Name="Drawing"

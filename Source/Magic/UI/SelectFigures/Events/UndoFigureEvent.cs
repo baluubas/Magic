@@ -1,17 +1,14 @@
-﻿namespace Magic.UI.SelectFigures.Events
+﻿using Magic.Imaging;
+
+namespace Magic.UI.SelectFigures.Events
 {
 	public class UndoFigureEvent
 	{
-		public int[] IdsToUndo { get; private set; }
+		public Figure Figure { get; private set; }
 
-		public UndoFigureEvent(int[] ids)
+		public UndoFigureEvent(Figure figure)
 		{
-			IdsToUndo = ids;
-		}
-
-		public UndoFigureEvent(int id)
-		{
-			IdsToUndo = new[] {id};
+			Figure = figure;
 		}
 	}
 }

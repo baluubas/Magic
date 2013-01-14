@@ -1,15 +1,18 @@
 ﻿using System;
 using Caliburn.Micro;
+using Magic.Imaging;
 using Microsoft.Win32;
 
 namespace Magic.UI.SelectInput
 {
 	public class SelectInputViewModel : Screen
 	{
+		private readonly FigureExportBuilder _figureBuilder;
 		private readonly EventAggregator _eventBus;
 
-		public SelectInputViewModel(EventAggregator eventBus)
+		public SelectInputViewModel(FigureExportBuilder figureBuilder, EventAggregator eventBus)
 		{
+			_figureBuilder = figureBuilder;
 			_eventBus = eventBus;
 		}
 
@@ -23,6 +26,7 @@ namespace Magic.UI.SelectInput
 			
 			if (dialogResult.Value)
 			{
+				_figureBuilder.SetSourcePdf(openFileDialog.FileNames);
 				_eventBus.Publish(new FilesSelectedEvent(openFileDialog.FileNames));	
 			}
 		}

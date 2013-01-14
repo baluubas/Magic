@@ -1,9 +1,11 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Caliburn.Micro;
+using Magic.Imaging;
 using Magic.UI.SelectFigures.Events;
-using Magic.UI.SelectFigures.Views;
 using StructureMap;
 
 namespace Magic.UI.SelectFigures.ViewModels
@@ -13,6 +15,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 		IHandle<FigureSelectedEvent>,
 		IHandle<UndoFigureEvent>
 	{
+		private readonly FigureExportBuilder _figureExportBuilder;
 		private readonly EventAggregator _messageBus;
 		private readonly IContainer _container;
 
@@ -21,10 +24,11 @@ namespace Magic.UI.SelectFigures.ViewModels
 		public ObservableCollection<Point[]> Selections { get; set; } 
 
 		public SelectFiguresViewModel(
-			string[] pdfFiles,
+		FigureExportBuilder figureExportBuilder,
 			EventAggregator messageBus,
 			IContainer container)
 		{
+			_figureExportBuilder = figureExportBuilder;
 			_messageBus = messageBus;
 			_container = container;
 			
@@ -33,11 +37,6 @@ namespace Magic.UI.SelectFigures.ViewModels
 			Figures = new ObservableCollection<FigureViewModel>();
 
 			_messageBus.Subscribe(this);
-
-			foreach (var pdfFile in pdfFiles)
-			{
-				CreateNewDrawing(pdfFile);
-			}
 		}
 
 		public void StartOver()
@@ -47,27 +46,33 @@ namespace Magic.UI.SelectFigures.ViewModels
 
 		public void DoneSelectingFigures()
 		{
-			_messageBus.Publish(new FigureSelectionDoneEvent(Figures.Select(x => x.Image.Value)));
+			_messageBus.Publish(new FigureSelectionDoneEvent());
 		}
 
 		public void Handle(FigureSelectedEvent message)
 		{
 			var figureViewModel = _container
-				.With(message.Id)
-				.With(message.CroppedImage)
+				.With(message.Figure)
 				.With(message.Undo)
 				.GetInstance<FigureViewModel>();
 
 			Figures.Add(figureViewModel);
+			figureViewModel.Initialize();
 		}
 
 		public void Handle(UndoFigureEvent message)
 		{
-			var vmToRemove = Figures.Where(fig => message.IdsToUndo.Contains(fig.Id)).ToArray();
+			var vmToRemove = Figures.Where(fig => message.Figure == fig.Figure).ToArray();
 			foreach (var vm in vmToRemove)
 			{
 				Figures.Remove(vm);
 			}
+		}
+
+		protected override void OnActivate()
+		{
+			var loadPagesProgress = new Progress<PdfPage>(CreateNewDrawing);
+			_figureExportBuilder.GetPdfPages(loadPagesProgress);
 		}
 
 		protected override void OnDeactivate(bool close)
@@ -75,9 +80,9 @@ namespace Magic.UI.SelectFigures.ViewModels
 			_messageBus.Unsubscribe(this);
 		}
 
-		private void CreateNewDrawing(string pdfFile)
+		private void CreateNewDrawing(PdfPage page)
 		{
-			var drawingViewModel = _container.With<string>(pdfFile).GetInstance<DrawingViewModel>();
+			var drawingViewModel = _container.With(page).GetInstance<DrawingViewModel>();
 			drawingViewModel.Initialize();
 			Drawings.Add(drawingViewModel);
 		}

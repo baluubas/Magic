@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Windows.Media.Imaging;
+using Magic.Imaging;
 
 namespace Magic.UI.SelectFigures.Events
 {
 	public class FigureSelectedEvent
 	{
-		public int Id { get; set; }
-		public CroppedBitmap CroppedImage { get; set; }
+		public Figure Figure { get; set; }
 		public Action Undo { get; private set; }
 
 		public FigureSelectedEvent(
-			int id,
-			CroppedBitmap croppedImage,
+			Figure figure,
 			Action undo)
 		{
-			Id = id;
-			CroppedImage = croppedImage;
+			Figure = figure;
 			Undo = undo;
 		}
 	}

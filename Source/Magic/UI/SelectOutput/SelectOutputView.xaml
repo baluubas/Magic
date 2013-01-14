@@ -11,7 +11,7 @@
     d:DesignHeight="562"
 	d:DesignWidth="738">
 	<UserControl.Resources>
-		<Storyboard x:Key="CompletionTransition">
+		<Storyboard x:Key="CompletionTransition" FillBehavior="HoldEnd">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="WaitingPanel">
 				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
@@ -49,7 +49,9 @@
 				Text="Hold on - saving figures to your DESKTOP" 
 				TextWrapping="Wrap" 
 				Width="300"
-				Style="{StaticResource HeaderStyle}" HorizontalAlignment="Left" TextAlignment="Center" />
+				Style="{StaticResource HeaderStyle}"
+				HorizontalAlignment="Left"
+				TextAlignment="Center" />
 
 			<ProgressBar 
 				IsEnabled="True"
@@ -57,15 +59,20 @@
 				Margin="0,48,0,0"
 				IsIndeterminate="True" />
 		</StackPanel>
+
 		<StackPanel x:Name="CompletedPanel" 
 			VerticalAlignment="Center" 
-			HorizontalAlignment="Center" Margin="219,141.486">
+			HorizontalAlignment="Center"
+			Margin="219,141.486"
+			Opacity="0">
 
 			<TextBlock 
 				Text="All DONE" 
 				TextWrapping="Wrap" 
 				Width="300"
-				Style="{StaticResource HeaderStyle}" HorizontalAlignment="Left" TextAlignment="Center" />
+				Style="{StaticResource HeaderStyle}"
+				HorizontalAlignment="Left" 
+				TextAlignment="Center" />
 
 			<Button 
 				x:Name="BrowseResult"
@@ -73,11 +80,12 @@
 				VerticalAlignment="Center" 
 				HorizontalAlignment="Center" 
 				FontFamily="Segoe UI Light"
-				FontSize="21" Margin="0,48,0,0" />
+				FontSize="21"
+				Margin="0,48,0,0" />
 		</StackPanel>
 
 		<Button 
-			Visibility="{Binding IsSaving.Value, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter=true}"
+			Opacity="0"
 			Grid.Row="1"
 			x:Name="StartOver"
 			Margin="24,24,24,24"

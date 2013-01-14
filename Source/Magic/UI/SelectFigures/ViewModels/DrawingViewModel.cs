@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
@@ -14,63 +10,65 @@ using Magic.UI.SelectFigures.Views;
 
 namespace Magic.UI.SelectFigures.ViewModels
 {
-	public class DrawingViewModel
+	public class DrawingViewModel : IDisposable
 	{
-		private double scale;
-
-		private readonly string _pdfFile;
+		private readonly PdfPage _page;
 		private readonly EventAggregator _messageBus;
-		private readonly IPdfToRasterConverter _pdfConverter;
+		private TemporaryBitmapFile _tempBitmapFile;
+		private readonly IDictionary<int, Figure> _figureMap = new Dictionary<int, Figure>();
 
 		public Observable<bool> IsGeneratingImage { get; set; }
 		public Observable<TransformedBitmap> Image { get; set; }
 		
 		public DrawingViewModel(
-			string pdfFile,
-			EventAggregator messageBus,
-			IPdfToRasterConverter pdfConverter)
+			PdfPage page,
+			EventAggregator messageBus)
 		{
-			_pdfFile = pdfFile;
+			_page = page;
 			_messageBus = messageBus;
-			_pdfConverter = pdfConverter;
+
 			Image = new Observable<TransformedBitmap>(new TransformedBitmap());
 			IsGeneratingImage = new Observable<bool>(true);
 		}
 
-		public void ScaleChanged(Viewbox viewBox)
-		{
-			if(Image.Value == null) 
-				return;
-			
-			scale = Image.Value.Width/viewBox.ActualWidth;
-		}
-
 		public void FigureSelected(FigureSelectedEventArgs arg)
 		{
-			var sourceRect = GetSourceRect(arg.X, arg.Y, arg.Width, arg.Height);
+			var sourceRect = new RelativeSelection(
+				_page.PageDimensions,
+				arg.RelativeOffsetX,
+				arg.RelativeOffsetY,
+				arg.RelativeWidth,
+				arg.RelativeHeight);
+
+			var figure = _page.CreateFigure(sourceRect);
+			_figureMap.Add(arg.Id, figure);
 
 			var figureSelectedEvent = new FigureSelectedEvent(
-				arg.Id,
-				new CroppedBitmap(Image.Value, sourceRect), 
-				arg.Undo);
+				figure,
+				() => {
+					_page.RemoveFigure(_figureMap[arg.Id]);
+					_figureMap.Remove(arg.Id);
+					arg.Undo();
+				});
 
 			_messageBus.Publish(figureSelectedEvent);
 		}
 
-		public void FigureUpdated(FiguresUpdatedEventArgs arg)
+		public void FigureUpdated(PageRotatedEventArgs arg)
 		{
-			Int32Rect sourceRect = GetSourceRect(arg.Bounds.X, arg.Bounds.Y, arg.Bounds.Width, arg.Bounds.Height);
-			CroppedBitmap croppedImage = new CroppedBitmap(Image.Value, sourceRect);
-			_messageBus.Publish(new FigureUpdateEvent(arg.Id, croppedImage));		
+			Figure figure = _figureMap[arg.Id];
+			figure.SetRotation(arg.Rotation);
+			_messageBus.Publish(new FigureRotatedEvent(figure));		
 		}
 
 		public async void Initialize()
 		{
-			string tempFileName = await Task<string>.Factory.StartNew(() => _pdfConverter.GenerateRasterForPdf(_pdfFile));
+			_tempBitmapFile = await _page.GenerateThumbnail();
 
-			Uri uri = new Uri(tempFileName, UriKind.Absolute);
+			Uri uri = new Uri(_tempBitmapFile.FileName, UriKind.Absolute);
 			var image = new BitmapImage();
 			image.BeginInit();
+			image.CacheOption = BitmapCacheOption.OnLoad;
 			image.UriSource = uri;
 			image.EndInit();
 
@@ -79,20 +77,9 @@ namespace Magic.UI.SelectFigures.ViewModels
 			IsGeneratingImage.Value = false;
 		}
 
-		private Int32Rect GetSourceRect(double inputX, double inputY, double inputWidth, double inputHeight)
+		public void Dispose()
 		{
-			double dpiX = Image.Value.DpiX;
-			double dpiY = Image.Value.DpiY;
-
-			double width = inputWidth * scale;
-			double height = inputHeight * scale;
-
-			int pixelWidth = (int) (width*dpiX/96);
-			int pixelHeight = (int) (height*dpiY/96);
-			int pixelOffsetX = (int)(inputX * scale * dpiX / 96);
-			int pixelOffsetY = (int)(inputY * scale * dpiY / 96);
-
-			return new Int32Rect(pixelOffsetX, pixelOffsetY, pixelWidth, pixelHeight);
+			_tempBitmapFile.Dispose();
 		}
 	}
 }

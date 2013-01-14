@@ -8,10 +8,10 @@ namespace Magic.UI.SelectFigures.Views
 		public int Id { get; set; }
 		public Action Undo { get; set; }
 
-		public double Y { get; set; }
-		public double X { get; set; }
-		public double Width { get; set; }
-		public double Height { get; set; }
+		public double RelativeOffsetY { get; set; }
+		public double RelativeOffsetX { get; set; }
+		public double RelativeWidth { get; set; }
+		public double RelativeHeight { get; set; }
 
 		public FigureSelectedEventArgs(
 			RoutedEvent @event,

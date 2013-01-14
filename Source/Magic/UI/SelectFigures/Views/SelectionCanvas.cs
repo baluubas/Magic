@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 namespace Magic.UI.SelectFigures.Views
 {
 	public delegate void FigureSelectedEventHandler(object sender, FigureSelectedEventArgs args);
-	public delegate void FiguresUpdatedEventHandler(object sender, FiguresUpdatedEventArgs args);
+	public delegate void FiguresUpdatedEventHandler(object sender, PageRotatedEventArgs args);
 
 	public class SelectionCanvas : Canvas
 	{
@@ -19,6 +19,7 @@ namespace Magic.UI.SelectFigures.Views
 		private Point _mouseLeftDownPoint;
 		private Selection _currentSelection;
 		private FigureSelectedEventArgs _currentSelectionEventArgs;
+		private double _currentAngle = 0;
 
 		public static readonly RoutedEvent FigureSelectedEvent;
 		public static readonly RoutedEvent FiguresUpdatedEvent;
@@ -53,13 +54,13 @@ namespace Magic.UI.SelectFigures.Views
 		{
 			TransformedBitmap source = (TransformedBitmap)image.Source;
 			var oldDimensions = new Size(ActualWidth, ActualHeight);
-			var oldSourceWidth = source.Width;
 
 			var rotateTransform = ((RotateTransform) source.Transform);
 			rotateTransform.Angle += 90;
 			image.Source = source.Clone();
 
-			UpdateSelections90Degrees(90, oldDimensions);
+			_currentAngle = rotateTransform.Angle;
+			UpdateSelections90Degrees(oldDimensions);
 		}
 
 		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -118,10 +119,10 @@ namespace Magic.UI.SelectFigures.Views
 				SetLeft(_currentSelection, left);
 				SetTop(_currentSelection, top);
 
-				_currentSelectionEventArgs.Y = top;
-				_currentSelectionEventArgs.X = left;
-				_currentSelectionEventArgs.Width = width;
-				_currentSelectionEventArgs.Height = height;
+				_currentSelectionEventArgs.RelativeOffsetY = top / ActualHeight;
+				_currentSelectionEventArgs.RelativeOffsetX = left / ActualWidth;
+				_currentSelectionEventArgs.RelativeWidth = width / ActualWidth;
+				_currentSelectionEventArgs.RelativeHeight = height / ActualHeight;
 			}
 		}
 
@@ -178,7 +179,7 @@ namespace Magic.UI.SelectFigures.Views
 			}
 		}
 
-		private void UpdateSelections90Degrees(int angle, Size oldDim)
+		private void UpdateSelections90Degrees(Size oldDim)
 		{
 			foreach (Selection selection in Children)
 			{
@@ -194,7 +195,7 @@ namespace Magic.UI.SelectFigures.Views
 				SetLeft(selection, newRect.X);
 				SetTop(selection, newRect.Y);
 
-				RaiseEvent(new FiguresUpdatedEventArgs(FiguresUpdatedEvent, this, selection.Id, newRect, angle));
+				RaiseEvent(new PageRotatedEventArgs(FiguresUpdatedEvent, this, selection.Id, (int)_currentAngle));
 			}
 		}
 	}
