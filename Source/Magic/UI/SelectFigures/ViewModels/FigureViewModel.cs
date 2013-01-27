@@ -10,11 +10,10 @@ using Action = System.Action;
 
 namespace Magic.UI.SelectFigures.ViewModels
 {
-	public class FigureViewModel : IHandle<FigureRotatedEvent>, IDisposable
+	public class FigureViewModel : IHandle<FigureRotatedEvent>
 	{
 		private readonly Action _undoFigure;
 		private readonly EventAggregator _messageBus;
-		private TemporaryBitmapFile _tempBitmapFile;
 
 		public Observable<BitmapSource> Image { get; set; }
 		public Observable<bool> IsLoading { get; set; }
@@ -46,7 +45,6 @@ namespace Magic.UI.SelectFigures.ViewModels
 			_undoFigure();
 			_messageBus.Publish(new UndoFigureEvent(Figure));
 			Image.Value = null;
-			_tempBitmapFile.Dispose();
 		}
 
 		public async void Handle(FigureRotatedEvent message)
@@ -59,27 +57,22 @@ namespace Magic.UI.SelectFigures.ViewModels
 
 		private async Task UpdateThumbnail()
 		{
-			if (_tempBitmapFile != null)
+			IsLoading.Value = true;
+			Image.Value = null;
+
+			using (var tempBitmapFile = new TemporaryBitmapFile("png"))
 			{
-				_tempBitmapFile.Dispose();
+				await Figure.Export(tempBitmapFile.FileName, new FigureThumbnail(), CancellationToken.None);
+				Uri uri = new Uri(tempBitmapFile.FileName, UriKind.Absolute);
+				var image = new BitmapImage();
+				image.BeginInit();
+				image.CacheOption = BitmapCacheOption.OnLoad;
+				image.UriSource = uri;
+				image.EndInit();
+
+				Image.Value = image;
+				IsLoading.Value = false;
 			}
-
-			_tempBitmapFile = new TemporaryBitmapFile("png");
-			await Figure.Export(_tempBitmapFile.FileName, new FigureThumbnail(), CancellationToken.None);
-			Uri uri = new Uri(_tempBitmapFile.FileName, UriKind.Absolute);
-			var image = new BitmapImage();
-			image.BeginInit();
-			image.CacheOption = BitmapCacheOption.OnLoad;
-			image.UriSource = uri;
-			image.EndInit();
-
-			Image.Value = image;
-			IsLoading.Value = false;
-		}
-
-		public void Dispose()
-		{
-			_tempBitmapFile.Dispose();
 		}
 	}
 }
