@@ -76,9 +76,24 @@
 							</Grid.ColumnDefinitions>
 
 							<Viewbox StretchDirection="Both">
-								<Image 
-									Source="{Binding Image.Value}"
-									RenderOptions.BitmapScalingMode="HighQuality"  />
+								<Grid>
+									<Grid Visibility="{Binding IsLoading.Value, Converter={StaticResource boolToVisibilityConverter}}" Background="White" Width="200" Height="200">
+										<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+											<Path 
+												Canvas.Left="50"
+												Canvas.Top="50"
+												Width="100"
+												Height="100"
+												Stretch="Uniform"
+												UseLayoutRounding="False"
+												Fill="LightGray"
+												Data="F1 M 87.2734,78.5449L 87.2734,8.72754L 8.72852,8.72754L 8.72852,78.5449L 87.2734,78.5449 Z M 0,96L 0,0L 96,0L 96,96L 0,96 Z M 78,48L 78,72L 18,72L 18,60L 30,42L 48,60L 66,30L 78,48 Z "/>
+										</Canvas>
+									</Grid>
+									<Image 
+										Source="{Binding Image.Value}"
+										RenderOptions.BitmapScalingMode="HighQuality"  />
+								</Grid>
 							</Viewbox>
 
 							<Border

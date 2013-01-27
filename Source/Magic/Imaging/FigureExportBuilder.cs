@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using StructureMap;
 
@@ -63,7 +64,7 @@ namespace Magic.Imaging
 		{
 		}
 
-		public async Task Export(string targetDirectory)
+		public async Task Export(string targetDirectory, CancellationToken token = default(CancellationToken))
 		{
 			PdfPage[] pdfPages = await GetPdfPages();
 			Directory.CreateDirectory(targetDirectory);
@@ -71,8 +72,13 @@ namespace Magic.Imaging
 			int figureIndex = 1;
 			foreach (var figure in pdfPages.SelectMany(x => x.Figures))
 			{
+				if (token.IsCancellationRequested)
+				{
+					return;
+				}
+
 				string filePath = Path.Combine(targetDirectory, string.Format("fig{0:D2}.jpg", figureIndex++));
-				await figure.Export(filePath, ImageOutputSetting);
+				await figure.Export(filePath, ImageOutputSetting, token);
 			}
 		}
 	}

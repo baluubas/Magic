@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
@@ -18,7 +19,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 		public Observable<BitmapSource> Image { get; set; }
 		public Observable<bool> IsLoading { get; set; }
 
-		public Figure Figure { get; private set; }
+		public Figure Figure { get; private set; }		 
 
 		public FigureViewModel(
 			Figure figure,
@@ -64,7 +65,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 			}
 
 			_tempBitmapFile = new TemporaryBitmapFile("png");
-			await Figure.Export(_tempBitmapFile.FileName, new FigureThumbnail());
+			await Figure.Export(_tempBitmapFile.FileName, new FigureThumbnail(), CancellationToken.None);
 			Uri uri = new Uri(_tempBitmapFile.FileName, UriKind.Absolute);
 			var image = new BitmapImage();
 			image.BeginInit();
@@ -73,6 +74,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 			image.EndInit();
 
 			Image.Value = image;
+			IsLoading.Value = false;
 		}
 
 		public void Dispose()

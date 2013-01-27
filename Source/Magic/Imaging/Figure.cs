@@ -1,5 +1,6 @@
 ﻿
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Magic.Imaging
@@ -30,20 +31,34 @@ namespace Magic.Imaging
 
 		public async Task Export(
 			string filename,
-			ImageOutputSetting settings)
+			ImageOutputSetting settings,
+			CancellationToken ct)
 		{
 			var trimmedSelection = await GetTrimmedSelection();
 			var scaleFactor = trimmedSelection.ScaleRatioForDimension(settings.TargetDimension);
 
+			ThrowIfCancelled(ct);
+
 			using (var renderedPageImageFile = await _page.RenderImage(scaleFactor, settings.Dpi))
 			using (Bitmap pageBitmap = new Bitmap(renderedPageImageFile.FileName))
 			{
+				ThrowIfCancelled(ct);
+
 				var cropRectangle = CalculateCropRectangleInPixels(trimmedSelection, pageBitmap.Width, pageBitmap.Height);
 				using (Bitmap cropped = pageBitmap.Clone(cropRectangle, pageBitmap.PixelFormat))
 				{
+					ThrowIfCancelled(ct);
 					cropped.RotateFlip(trimmedSelection.Rotation.ToRotateFlipType());
 					cropped.Save(filename, settings.Codec, settings.Params);
 				}
+			}
+		}
+
+		private static void ThrowIfCancelled(CancellationToken ct)
+		{
+			if (ct.IsCancellationRequested)
+			{
+				throw new TaskCanceledException();
 			}
 		}
 

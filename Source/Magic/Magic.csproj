@@ -104,7 +104,7 @@
     <Compile Include="Imaging\Rotatation.cs" />
     <Compile Include="Imaging\ImageOutputSetting.cs" />
     <Compile Include="Imaging\TemporaryBitmapFile.cs" />
-    <Compile Include="Imaging\WipoImageOutputSettingses.cs" />
+    <Compile Include="Imaging\WipoImageOutputSetting.cs" />
     <Compile Include="UI\Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="UI\Helpers\Obserable.cs" />
     <Compile Include="UI\SelectFigures\Events\FigureRotatedEvent.cs" />

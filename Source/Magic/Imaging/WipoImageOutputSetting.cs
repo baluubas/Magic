@@ -2,7 +2,7 @@
 
 namespace Magic.Imaging
 {
-	public class WipoImageOutputSettingses : ImageOutputSetting
+	public class WipoImageOutputSetting : ImageOutputSetting
 	{
 		public override Dimensions TargetDimension
 		{
