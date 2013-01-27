@@ -8,7 +8,8 @@
 	xmlns:views="clr-namespace:Magic.UI.SelectFigures.Views"
 	mc:Ignorable="d" 
 	d:DesignHeight="1024" 
-	d:DesignWidth="720">
+	d:DesignWidth="720"
+	cal:Message.Attach="[Event KeyDown] = [Action KeyDown($eventArgs)]">
 
 
 	<Grid>

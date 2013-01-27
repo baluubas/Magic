@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Caliburn.Micro;
 using Magic.Imaging;
 using Magic.UI.SelectFigures.Events;
@@ -47,6 +48,14 @@ namespace Magic.UI.SelectFigures.ViewModels
 		public void DoneSelectingFigures()
 		{
 			_messageBus.Publish(new FigureSelectionDoneEvent());
+		}
+
+		public void KeyDown(KeyEventArgs e)
+		{
+			if (e.Key == Key.Z && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Figures.Any())
+			{
+				Figures.Last().UndoFigure();
+			}
 		}
 
 		public void Handle(FigureSelectedEvent message)
