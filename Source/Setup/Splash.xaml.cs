@@ -60,5 +60,11 @@ namespace Magic.Setup
 			_bootstrapper.Engine.Plan(LaunchAction.Install);
 			MessageBox.Show("Planning");
 		}
+
+		private void ExecuteUninstall(object sender, RoutedEventArgs e)
+		{
+			_bootstrapper.Engine.Plan(LaunchAction.Uninstall);
+			MessageBox.Show("Planning");
+		}
 	}
 }

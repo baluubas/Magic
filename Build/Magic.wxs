@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product 
+    Id="EF17D722-754B-11E2-A168-4C9D6188709B"
+    UpgradeCode="08C44606-754C-11E2-B0E7-709D6188709B"
+    Name="Magic"
+    Version="0.0.1"
+    Manufacturer="Anders Persson"
+    Language="1033">
+    
+    <Package 
+      InstallerVersion="200"
+      InstallScope="perUser"
+      Compressed="yes"
+      Comments="Windows Installer Package"/>
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="INSTALLDIR" Name="Magic">
+          <Component Id="ApplicationFiles" Guid="cab93ae2-e2a6-4499-8e3b-d2a9e90d8fba">
+            <File Id="Caliburn" Source="bin\Caliburn.Micro.dll"/>
+            <File Id="ElysiumDesign" Source="bin\Elysium.Design.11.0.dll"/>
+            <File Id="Elysium" Source="bin\Elysium.dll"/>
+            <File Id="Ghostscript" Source="bin\gsdll32.dll"/>
+            <File Id="iTextSharp" Source="bin\itextsharp.dll"/>
+            <File Id="App" Source="bin\Magic.exe"/>
+            <File Id="AppConfig" Source="bin\Magic.exe.config"/>
+            <File Id="ExpressionDrawingDesign" Source="bin\Microsoft.Expression.Drawing.Design.dll"/>
+            <File Id="ExpressionDrawing" Source="bin\Microsoft.Expression.Drawing.dll"/>
+            <File Id="ExpressionDrawingInteractions" Source="bin\Microsoft.Expression.Interactions.dll"/>
+            <File Id="StructureMap" Source="bin\StructureMap.dll"/>
+            <File Id="WindowsInteractivity" Source="bin\System.Windows.Interactivity.dll"/>
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="DefaultFeature" Level="1">
+      <ComponentRef Id="ApplicationFiles"/>
+    </Feature>
+  </Product>
+</Wix>
