@@ -5,7 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:setup="clr-namespace:Magic.Setup"
 	mc:Ignorable="d" 
 	x:Class="Magic.Setup.InstallWindow"
-    Title="MainWindow"
+    Title="Magic Installer"
 	Height="600"
 	Width="400"
 	ResizeMode="NoResize"
