@@ -1,4 +1,5 @@
 ﻿
+using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Tools.WindowsInstallerXml.Bootstrapper;
 
@@ -10,15 +11,24 @@ namespace Magic.Setup
 	
 		protected override void Run()
 		{
-			Engine.Log(LogLevel.Verbose, "Launching Custom Setup UX");
+			Engine.Log(LogLevel.Verbose, "Launching Magic Setup UX");
 			BootstrapperDispatcher = Dispatcher.CurrentDispatcher;
 			
-			Splash splash = new Splash(this);
+			Window window = GetSetupWindow();
+			
 			Engine.Detect();
-			splash.Closed += (sender, e) => BootstrapperDispatcher.InvokeShutdown();
-			splash.Show();
+			window.Closed += (sender, e) => BootstrapperDispatcher.InvokeShutdown();
+			window.Show();
 			Dispatcher.Run();
 			Engine.Quit(0);
+		}
+
+		private Window GetSetupWindow()
+		{
+			if(Command.Action == LaunchAction.Uninstall)
+				return new UninstallWindow(this);
+
+			return new InstallWindow(this);
 		}
 	}
 }

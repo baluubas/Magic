@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Caliburn.Micro;
 using Magic.Imaging;
 using Magic.UI.SelectFigures.Events;
+using Microsoft;
 using StructureMap;
 
 namespace Magic.UI.SelectFigures.ViewModels

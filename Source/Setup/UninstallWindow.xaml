@@ -1,0 +1,117 @@
+﻿<setup:WindowBase
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:setup="clr-namespace:Magic.Setup"
+	mc:Ignorable="d" 
+	x:Class="Magic.Setup.UninstallWindow"
+    Title="MainWindow"
+	Height="800"
+	Width="500"
+	ResizeMode="NoResize"
+	WindowStyle="None"
+	WindowStartupLocation="CenterScreen">
+
+	<setup:WindowBase.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</setup:WindowBase.Resources>
+
+
+	<Border 
+		Background="#171717"
+		BorderBrush="#313131"
+		BorderThickness="1">
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<Button 
+				x:Name="CloseButton"
+				Click="ExitSetup"
+				HorizontalAlignment="Right"
+				Style="{StaticResource CloseButton}"/>
+
+			<TextBlock Grid.Row="1"
+					HorizontalAlignment="Center" 
+					Margin="0,80,0,0" 
+					Text="Magic"
+					Style="{StaticResource Title}" />
+
+			<DockPanel
+				x:Name="PreInstall"
+				Grid.Row="2" 
+				LastChildFill="True">
+			
+				<TextBlock
+					DockPanel.Dock="Top"
+					Margin="48" 
+					HorizontalAlignment="Center"
+					Style="{StaticResource LargeText}">
+					
+					Oh well, it was fun as long as it lasted <LineBreak /><LineBreak />ktxbai
+
+				</TextBlock>
+
+				<Button 
+					DockPanel.Dock="Top"
+					x:Name="InstallButton"
+					Content="Uninstall" 
+					Click="PerformUninstall"
+					Style="{StaticResource Large}"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Margin="0,48" />
+
+			</DockPanel>
+
+			<Grid 
+				x:Name="UninstallProgress"
+				Grid.Row="2"
+				Visibility="Collapsed">
+
+				<ProgressBar
+					VerticalAlignment="Top"
+					x:Name="Progress"
+					Width="300"
+					Height="10"
+					Margin="0,180,0,0"
+					IsIndeterminate="True"
+					Foreground="#FF017BCD"
+					Background="LightGray"
+					BorderThickness="0" />
+			</Grid>
+
+			<DockPanel
+				x:Name="PostUninstall"
+				Grid.Row="2"
+				Visibility="Collapsed">
+
+				<TextBlock 
+					x:Name="DoneText"
+					DockPanel.Dock="Top"
+					Text="All done" 
+					Margin="48" 
+					HorizontalAlignment="Center"
+					Style="{StaticResource LargeText}"/>
+
+				<Button 
+					DockPanel.Dock="Top"
+					Content="Exit" 
+					Click="ExitSetup"
+					Margin="0,220,0,0"
+					VerticalAlignment="Top"
+					HorizontalAlignment="Center" 
+					Style="{StaticResource Large}" />
+
+			</DockPanel>
+		</Grid>
+	</Border>
+</setup:WindowBase>

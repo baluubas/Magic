@@ -68,7 +68,7 @@ namespace Magic.UI.SelectOutput
 				await _figureExportBuilder.Export(_targetDirectory, cancellationTokenSource.Token);
 			}
 			catch (TaskCanceledException) { }
-			catch (Exception ex)
+			catch (Exception)
 			{
 			}
 			finally
