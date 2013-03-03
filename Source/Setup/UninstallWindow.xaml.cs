@@ -33,7 +33,10 @@ namespace Magic.Setup
 				
 				if (t.IsFaulted)
 				{
-					DoneText.Text = "Uninstall failed - see install log for more information.";
+					DoneText.Text = "Uninstall failed";
+
+					Error.Text = t.Exception.InnerException.Message;
+					Error.Visibility = Visibility.Visible;
 				}                                      
 			}, CancellationToken.None, TaskContinuationOptions.None, ui);
 		}

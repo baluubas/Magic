@@ -7,6 +7,16 @@
 		<Setter Property="FontSize" Value="32" />
 		<Setter Property="TextAlignment" Value="Center" />
 		<Setter Property="Foreground" Value="White" />
+	</Style>	
+	
+	<Style x:Key="ErrorText" TargetType="TextBlock">
+		<Setter Property="TextWrapping" Value="Wrap" />
+		<Setter Property="FontFamily" Value="/Setup;component/Fonts/#Segoe UI Light" />
+		<Setter Property="FontSize" Value="21" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Background" Value="#33FF0000" />
+		<Setter Property="Padding" Value="20" />
 	</Style>
 
 	<Style x:Key="Title" TargetType="TextBlock">

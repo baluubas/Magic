@@ -53,23 +53,12 @@ namespace Magic.Setup
 				
 				if (t.IsFaulted)
 				{
-					DoneText.Text = "Installation failed - see install log for more information.";
+					DoneText.Text = "Installation failed";
+					
+					Error.Text = t.Exception.InnerException.Message;
+					Error.Visibility = Visibility.Visible;
 				}                                      
 			}, CancellationToken.None, TaskContinuationOptions.None, ui);
-		}
-
-		private void ChooseInstallDirectory(object sender, RoutedEventArgs e)
-		{
-			var browser = new FolderBrowserDialog();
-			browser.ShowNewFolderButton = true;
-			browser.Description = "Choose installation directory";
-
-			var result = browser.ShowDialog();
-			if (result == System.Windows.Forms.DialogResult.OK)
-			{
-				_selectedInstallPath = browser.SelectedPath;
-				ChooseDirButton.Text = _selectedInstallPath;
-			}
 		}
 	}
 }

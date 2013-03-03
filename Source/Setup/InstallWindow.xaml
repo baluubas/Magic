@@ -66,20 +66,6 @@
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Margin="0,48" />
-
-				<Button
-					Click="ChooseInstallDirectory" 
-					HorizontalAlignment="Right"
-					HorizontalContentAlignment="Right"
-					VerticalAlignment="Bottom"
-					Margin="0,0,15,14"
-					MaxWidth="400"
-					Style="{StaticResource LinkButton}">
-					<TextBlock 
-						x:Name="ChooseDirButton"
-						Text="Choose directory" 
-						TextTrimming="CharacterEllipsis" />
-				</Button>
 			</DockPanel>
 
 			<Grid 
@@ -112,11 +98,19 @@
 					HorizontalAlignment="Center"
 					Style="{StaticResource LargeText}"/>
 
+				<TextBlock 
+					x:Name="Error"
+					DockPanel.Dock="Top"
+					HorizontalAlignment="Center"
+					Margin="20,0"
+					Visibility="Collapsed"
+					Style="{StaticResource ErrorText}" />
+				
 				<Button 
 					DockPanel.Dock="Top"
 					Content="Exit" 
 					Click="ExitSetup"
-					Margin="0,220,0,0"
+					Margin="0,100,0,0"
 					VerticalAlignment="Top"
 					HorizontalAlignment="Center" 
 					Style="{StaticResource Large}" />

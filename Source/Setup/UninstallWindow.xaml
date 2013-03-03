@@ -102,6 +102,14 @@
 					HorizontalAlignment="Center"
 					Style="{StaticResource LargeText}"/>
 
+				<TextBlock 
+					x:Name="Error"
+					DockPanel.Dock="Top"
+					HorizontalAlignment="Center"
+					Margin="20,0"
+					Visibility="Collapsed"
+					Style="{StaticResource ErrorText}" />
+
 				<Button 
 					DockPanel.Dock="Top"
 					Content="Exit" 

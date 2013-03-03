@@ -57,7 +57,7 @@ namespace Magic.UI.SelectOutput
 			Export(new WipoImageOutputSetting(), "WIPO");
 		}
 
-		private async Task Export(ImageOutputSetting settings, string name)
+		private async void Export(ImageOutputSetting settings, string name)
 		{
 			ShowSaving.Value = true;
 			try

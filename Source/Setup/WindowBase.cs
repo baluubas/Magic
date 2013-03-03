@@ -16,7 +16,7 @@ namespace Magic.Setup
 		{
 			bootstrapper.ApplyComplete += OnApplyComplete;
 			bootstrapper.PlanComplete += OnPlanComplete;
-			bootstrapper.Error += (sender, args) => MessageBox.Show("Darn, setup failed:\n" + args.ErrorMessage);
+			bootstrapper.Error += (sender, args) => _completionSource.TrySetException(new Exception(args.ErrorMessage));
 			
 			Engine = bootstrapper.Engine;
 		}
