@@ -26,6 +26,9 @@ namespace Magic.Setup
 			: base(bootstrapper)
 		{
 			InitializeComponent();
+			_selectedInstallPath = System.IO.Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+				"Magic");
 		}
 
 		private void ExitSetup(object sender, RoutedEventArgs e)

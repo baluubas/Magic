@@ -12,7 +12,9 @@
     </BootstrapperApplicationRef>
     <Chain>
       <PackageGroupRef Id='Netfx4Full' />
-      <MsiPackage SourceFile="Magic.msi" Id="MagicInstallationPackageId" Cache="yes" Visible="no"/>
+      <MsiPackage SourceFile="Magic.msi" Id="MagicInstallationPackageId" Cache="yes" Visible="no">
+        <MsiProperty Name="INSTALLDIR" Value="[InstallFolder]" />
+      </MsiPackage>
     </Chain>
   </Bundle>
   <Fragment>

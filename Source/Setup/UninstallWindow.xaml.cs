@@ -7,9 +7,6 @@ namespace Magic.Setup
 {
 	public partial class UninstallWindow : WindowBase
 	{
-		private string _selectedInstallPath;
-		private const string BurnBundleInstallDirectoryVariable = "InstallFolder";
-
 		public UninstallWindow(BootstrapperApplication bootstrapper) 
 			: base(bootstrapper)
 		{
@@ -27,7 +24,6 @@ namespace Magic.Setup
 			PreInstall.Visibility = Visibility.Collapsed;
 			UninstallProgress.Visibility = Visibility.Visible;
 
-			Engine.StringVariables[BurnBundleInstallDirectoryVariable] = _selectedInstallPath;
 			var ui = TaskScheduler.FromCurrentSynchronizationContext();
 			PerformLaunchAction(LaunchAction.Uninstall).ContinueWith(t =>
 			{

@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Caliburn.Micro">
       <HintPath>..\packages\Caliburn.Micro.1.4.1\lib\net40\Caliburn.Micro.dll</HintPath>
@@ -211,6 +214,7 @@
       <Link>gsdll32.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="appicon.ico" />
     <Resource Include="en\Elysium.xml" />
     <Resource Include="en\Microsoft.Expression.Drawing.xml" />
     <Resource Include="Microsoft.Expression.Drawing.xml" />

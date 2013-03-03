@@ -13,10 +13,10 @@
       InstallScope="perUser"
       Compressed="yes"
       Comments="Windows Installer Package"/>
+    
     <Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="LocalAppDataFolder">
         <Directory Id="INSTALLDIR" Name="Magic">
           <Component Id="ApplicationFiles" Guid="cab93ae2-e2a6-4499-8e3b-d2a9e90d8fba">
             <File Id="Caliburn" Source="bin\Caliburn.Micro.dll"/>
@@ -30,14 +30,31 @@
             <File Id="ThreadingTasks" Source="bin\Microsoft.Threading.Tasks.dll"/>
             <File Id="StructureMap" Source="bin\StructureMap.dll"/>
             <File Id="SystemRuntime" Source="bin\System.Runtime.dll"/>
+            <File Id="SystemWindowsShell" Source="bin\Microsoft.Windows.Shell.dll"/>
             <File Id="WindowsInteractivity" Source="bin\System.Windows.Interactivity.dll"/>
           </Component>
-        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Magic"/>
       </Directory>
     </Directory>
 
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="be39b723-3634-4b8e-a7a1-a40f37644e75">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+            Name="Magic"
+            Description="A tool for extracting images from PDFs."
+            Target="[INSTALLDIR]Magic.exe"
+            WorkingDirectory="INSTALLDIR" />
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Magic" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
     <Feature Id="DefaultFeature" Level="1">
       <ComponentRef Id="ApplicationFiles"/>
+      <ComponentRef Id="ApplicationShortcut" />
     </Feature>
   </Product>
 </Wix>
