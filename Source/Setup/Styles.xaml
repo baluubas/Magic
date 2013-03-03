@@ -26,6 +26,46 @@
 		<Setter Property="Foreground" Value="White" />
 		<Setter Property="Content" Value="x" />
 		<Setter Property="Padding" Value="10,5,10,10" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ButtonBase}">
+					<Border 
+						Background="{TemplateBinding Background}" 
+						BorderBrush="{TemplateBinding BorderBrush}" 
+						BorderThickness="{TemplateBinding BorderThickness}" 
+						TextBlock.Foreground="{TemplateBinding Foreground}" 
+						TextBlock.FontFamily="{TemplateBinding FontFamily}" 
+						TextBlock.FontSize="{TemplateBinding FontSize}" 
+						TextBlock.FontStretch="{TemplateBinding FontStretch}" 
+						TextBlock.FontStyle="{TemplateBinding FontStyle}" 
+						TextBlock.FontWeight="{TemplateBinding FontWeight}" 
+						TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}" 
+						TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}" 
+						RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}" 
+						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+
+						<ContentPresenter 
+							Margin="{TemplateBinding Padding}" 
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							RecognizesAccessKey="True" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="Gray" />
+				<Setter Property="BorderBrush" Value="Gray" />
+				<Setter Property="Foreground" Value="White" />
+			</Trigger>
+			<Trigger Property="IsPressed" Value="True">
+				<Setter Property="Background" Value="#017bcd" />
+				<Setter Property="BorderBrush" Value="#017bcd" />
+				<Setter Property="Foreground" Value="White" />
+			</Trigger>
+		</Style.Triggers>
 	</Style>	
 	
 	<Style x:Key="LinkButton" TargetType="Button">
@@ -47,6 +87,7 @@
 	</Style>
 
 	<SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+
 	<Style x:Key="Large" TargetType="{x:Type Button}">
 		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
 		<Setter Property="Background" Value="#017bcd"/>
@@ -59,23 +100,48 @@
 		<Setter Property="FontFamily" Value="/Setup;component/Fonts/#Segoe UI Light" />
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type Button}">
-					<Themes:ButtonChrome x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" RenderDefaulted="{TemplateBinding IsDefaulted}" SnapsToDevicePixels="true">
-						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-					</Themes:ButtonChrome>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsKeyboardFocused" Value="true">
-							<Setter Property="RenderDefaulted" TargetName="Chrome" Value="true"/>
-						</Trigger>
-						<Trigger Property="ToggleButton.IsChecked" Value="true">
-							<Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
-						</Trigger>
-						<Trigger Property="IsEnabled" Value="false">
-							<Setter Property="Foreground" Value="#ADADAD"/>
-						</Trigger>
-					</ControlTemplate.Triggers>
+				<ControlTemplate TargetType="{x:Type ButtonBase}">
+					<Border 
+						Background="{TemplateBinding Background}" 
+						BorderBrush="{TemplateBinding BorderBrush}" 
+						BorderThickness="{TemplateBinding BorderThickness}" 
+						TextBlock.Foreground="{TemplateBinding Foreground}" 
+						TextBlock.FontFamily="{TemplateBinding FontFamily}" 
+						TextBlock.FontSize="{TemplateBinding FontSize}" 
+						TextBlock.FontStretch="{TemplateBinding FontStretch}" 
+						TextBlock.FontStyle="{TemplateBinding FontStyle}" 
+						TextBlock.FontWeight="{TemplateBinding FontWeight}" 
+						TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}" 
+						TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}" 
+						RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}" 
+						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						
+						<ContentPresenter 
+							Margin="{TemplateBinding Padding}" 
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							RecognizesAccessKey="True" />
+					</Border>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="White" />
+				<Setter Property="BorderBrush" Value="White" />
+				<Setter Property="Foreground" Value="Black" />
+			</Trigger>
+			<Trigger Property="IsPressed" Value="True">
+				<Setter Property="Background" Value="Gray" />
+				<Setter Property="BorderBrush" Value="Gray" />
+				<Setter Property="Foreground" Value="Black" />
+			</Trigger>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Background" Value="Transparent" />
+				<Setter Property="BorderBrush" Value="Gray" />
+				<Setter Property="Foreground" Value="Gray" />
+			</Trigger>
+		</Style.Triggers>
 	</Style>
+
 </ResourceDictionary>

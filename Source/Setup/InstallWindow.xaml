@@ -73,7 +73,7 @@
 					HorizontalContentAlignment="Right"
 					VerticalAlignment="Bottom"
 					Margin="0,0,15,14"
-					Width="400"
+					MaxWidth="400"
 					Style="{StaticResource LinkButton}">
 					<TextBlock 
 						x:Name="ChooseDirButton"
