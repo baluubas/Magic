@@ -6,8 +6,8 @@
 	mc:Ignorable="d" 
 	x:Class="Magic.Setup.InstallWindow"
     Title="MainWindow"
-	Height="800"
-	Width="500"
+	Height="600"
+	Width="400"
 	ResizeMode="NoResize"
 	WindowStyle="None"
 	WindowStartupLocation="CenterScreen">
@@ -41,7 +41,7 @@
 
 			<TextBlock Grid.Row="1"
 					HorizontalAlignment="Center" 
-					Margin="0,80,0,0" 
+					Margin="0,40,0,0" 
 					Text="Magic"
 					Style="{StaticResource Title}" />
 
@@ -63,9 +63,8 @@
 					Content="Install" 
 					Click="PerformInstall"
 					Style="{StaticResource Large}"
-					VerticalAlignment="Center"
-					HorizontalAlignment="Center"
-					Margin="0,48" />
+					VerticalAlignment="Top"
+					HorizontalAlignment="Center" />
 			</DockPanel>
 
 			<Grid 

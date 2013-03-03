@@ -4,7 +4,7 @@
 	<Style x:Key="LargeText" TargetType="TextBlock">
 		<Setter Property="TextWrapping" Value="Wrap" />
 		<Setter Property="FontFamily" Value="/Setup;component/Fonts/#Segoe UI Light" />
-		<Setter Property="FontSize" Value="32" />
+		<Setter Property="FontSize" Value="24" />
 		<Setter Property="TextAlignment" Value="Center" />
 		<Setter Property="Foreground" Value="White" />
 	</Style>	
@@ -12,7 +12,7 @@
 	<Style x:Key="ErrorText" TargetType="TextBlock">
 		<Setter Property="TextWrapping" Value="Wrap" />
 		<Setter Property="FontFamily" Value="/Setup;component/Fonts/#Segoe UI Light" />
-		<Setter Property="FontSize" Value="21" />
+		<Setter Property="FontSize" Value="18" />
 		<Setter Property="TextAlignment" Value="Center" />
 		<Setter Property="Foreground" Value="White" />
 		<Setter Property="Background" Value="#33FF0000" />
@@ -22,7 +22,7 @@
 	<Style x:Key="Title" TargetType="TextBlock">
 		<Setter Property="TextWrapping" Value="Wrap" />
 		<Setter Property="FontFamily" Value="/Setup;component/Fonts/#Segoe UI Semibold" />
-		<Setter Property="FontSize" Value="64" />
+		<Setter Property="FontSize" Value="54" />
 		<Setter Property="TextAlignment" Value="Center" />
 		<Setter Property="Foreground" Value="#FF017BCD" />
 	</Style>	
@@ -30,7 +30,7 @@
 	<Style x:Key="CloseButton" TargetType="Button">
 		<Setter Property="FontWeight" Value="DemiBold" />
 		<Setter Property="FontFamily" Value="Arial" />
-		<Setter Property="FontSize" Value="30" />
+		<Setter Property="FontSize" Value="24" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Foreground" Value="White" />
@@ -146,7 +146,7 @@
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
 		<Setter Property="Padding" Value="15,7,15,7"/>
-		<Setter Property="FontSize" Value="42"/>
+		<Setter Property="FontSize" Value="21"/>
 		<Setter Property="FontFamily" Value="/Setup;component/Fonts/#Segoe UI Light" />
 		<Setter Property="Template">
 			<Setter.Value>

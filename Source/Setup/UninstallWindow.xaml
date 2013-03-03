@@ -6,8 +6,8 @@
 	mc:Ignorable="d" 
 	x:Class="Magic.Setup.UninstallWindow"
     Title="MainWindow"
-	Height="800"
-	Width="500"
+	Height="600"
+	Width="400"
 	ResizeMode="NoResize"
 	WindowStyle="None"
 	WindowStartupLocation="CenterScreen">
@@ -41,7 +41,7 @@
 
 			<TextBlock Grid.Row="1"
 					HorizontalAlignment="Center" 
-					Margin="0,80,0,0" 
+					Margin="0,40,0,0" 
 					Text="Magic"
 					Style="{StaticResource Title}" />
 
@@ -55,9 +55,7 @@
 					Margin="48" 
 					HorizontalAlignment="Center"
 					Style="{StaticResource LargeText}">
-					
 					Oh well, it was fun as long as it lasted <LineBreak /><LineBreak />ktxbai
-
 				</TextBlock>
 
 				<Button 
@@ -66,9 +64,8 @@
 					Content="Uninstall" 
 					Click="PerformUninstall"
 					Style="{StaticResource Large}"
-					VerticalAlignment="Center"
-					HorizontalAlignment="Center"
-					Margin="0,48" />
+					VerticalAlignment="Top"
+					HorizontalAlignment="Center" />
 
 			</DockPanel>
 
