@@ -139,7 +139,7 @@
 					FontSize="21" />
 
 			<Button 
-					x:Name="DoneSelectingFigures"
+					x:Name="GoToNextPage"
 					Margin="0,24,24,24"
 					Grid.Column="1"
 					HorizontalAlignment="Right" 

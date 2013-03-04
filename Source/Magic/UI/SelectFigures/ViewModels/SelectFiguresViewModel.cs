@@ -46,10 +46,13 @@ namespace Magic.UI.SelectFigures.ViewModels
 			_messageBus.Publish(new StartOverEvent());
 		}
 
-		public void DoneSelectingFigures()
+		public void GoToNextPage()
 		{
 			_messageBus.Publish(new FigureSelectionDoneEvent());
 		}
+
+
+		public bool CanGoToNextPage { get { return Figures.Any(); }}
 
 		public void KeyDown(KeyEventArgs e)
 		{
@@ -68,6 +71,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 
 			Figures.Add(figureViewModel);
 			figureViewModel.Initialize();
+			NotifyOfPropertyChange(() => CanGoToNextPage);
 		}
 
 		public void Handle(UndoFigureEvent message)
@@ -77,6 +81,7 @@ namespace Magic.UI.SelectFigures.ViewModels
 			{
 				Figures.Remove(vm);
 			}
+			NotifyOfPropertyChange(() => CanGoToNextPage);
 		}
 
 		protected override void OnActivate()
