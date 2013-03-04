@@ -23,7 +23,7 @@
             <File Id="Elysium" Source="bin\Elysium.dll"/>
             <File Id="Ghostscript" Source="bin\gsdll32.dll"/>
             <File Id="iTextSharp" Source="bin\itextsharp.dll"/>
-            <File Id="App" Source="bin\Magic.exe"/>
+            <File Id="App" Source="bin\Magic.exe" />
             <File Id="AppConfig" Source="bin\Magic.exe.config"/>
             <File Id="ExpressionDrawing" Source="bin\Microsoft.Expression.Drawing.dll"/>
             <File Id="ExpressionDrawingInteractions" Source="bin\Microsoft.Expression.Interactions.dll"/>
@@ -57,5 +57,6 @@
       <ComponentRef Id="ApplicationFiles"/>
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
+    
   </Product>
 </Wix>

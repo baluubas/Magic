@@ -5,6 +5,8 @@
   xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
   
   <Bundle Name="Magic" Version="1.0.0.0" Manufacturer="Anders Persson" UpgradeCode="e41aabbf-2cb4-48bf-bc7a-104d8728befc">
+    <Variable Name="LaunchTarget" Value="[INSTALLDIR]\Magic.exe" />
+    
     <BootstrapperApplicationRef Id="ManagedBootstrapperApplicationHost">
       <Payload SourceFile="BootstrapperCore.config"/>
       <Payload SourceFile="bin\Setup.dll"/>
@@ -15,14 +17,10 @@
       <MsiPackage SourceFile="Magic.msi" Id="MagicInstallationPackageId" Cache="yes" Visible="no">
         <MsiProperty Name="INSTALLDIR" Value="[InstallFolder]" />
       </MsiPackage>
+      
     </Chain>
   </Bundle>
   <Fragment>
-    <!-- Managed bootstrapper requires .NET as a dependency, since it was written in .NET.
-       WiX provides a Bootstrapper for the bootstrapper. The fragment below includes .NET.
-       For more information or examples see Heath Stewart's blog or the WiX source:
-       http://blogs.msdn.com/b/heaths/archive/2011/10/28/introducing-managed-bootstrapper-applications.aspx
-       -->
     <WixVariable Id="WixMbaPrereqPackageId" Value="Netfx4Full" />
     <WixVariable Id="WixMbaPrereqLicenseUrl" Value="NetfxLicense.rtf" />
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Version" Variable="Netfx4FullVersion" />

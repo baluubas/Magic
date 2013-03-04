@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -49,16 +50,25 @@ namespace Magic.Setup
 			{
 				CloseButton.IsEnabled = true;
 				InstallProgess.Visibility = Visibility.Collapsed;
-				PostInstall.Visibility = Visibility.Visible;
 				
 				if (t.IsFaulted)
 				{
-					DoneText.Text = "Installation failed";
-					
 					Error.Text = t.Exception.InnerException.Message;
-					Error.Visibility = Visibility.Visible;
-				}                                      
+					PostInstallWithError.Visibility = Visibility.Visible;
+				}
+				else
+				{
+					PostInstall.Visibility = Visibility.Visible;
+				}  
+				                                    
 			}, CancellationToken.None, TaskContinuationOptions.None, ui);
+		}
+
+		private void LaunchAndExit(object sender, RoutedEventArgs e)
+		{
+			var exe = System.IO.Path.Combine(_selectedInstallPath, "Magic.exe");
+			Process.Start(exe);
+			Close();
 		}
 	}
 }

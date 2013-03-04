@@ -85,14 +85,13 @@
 			</Grid>
 
 			<DockPanel
-				x:Name="PostInstall"
+				x:Name="PostInstallWithError"
 				Grid.Row="2"
 				Visibility="Collapsed">
 
 				<TextBlock 
-					x:Name="DoneText"
 					DockPanel.Dock="Top"
-					Text="All done" 
+					Text="Bummer, installation failed" 
 					Margin="48" 
 					HorizontalAlignment="Center"
 					Style="{StaticResource LargeText}"/>
@@ -102,18 +101,55 @@
 					DockPanel.Dock="Top"
 					HorizontalAlignment="Center"
 					Margin="20,0"
-					Visibility="Collapsed"
 					Style="{StaticResource ErrorText}" />
-				
+
 				<Button 
-					DockPanel.Dock="Top"
 					Content="Exit" 
 					Click="ExitSetup"
-					Margin="0,100,0,0"
 					VerticalAlignment="Top"
-					HorizontalAlignment="Center" 
+					HorizontalAlignment="Center"
+					Margin="0,100,0,0"
 					Style="{StaticResource Large}" />
 
+			</DockPanel>
+
+			<DockPanel
+				x:Name="PostInstall"
+				Grid.Row="2"
+				Visibility="Collapsed">
+
+				<TextBlock 
+					DockPanel.Dock="Top"
+					Text="All done. Now get some work done." 
+					Margin="48" 
+					HorizontalAlignment="Center"
+					Style="{StaticResource LargeText}"/>
+
+				<StackPanel 
+					DockPanel.Dock="Top" 
+					Orientation="Horizontal" 
+					Margin="0,100,0,0"
+					HorizontalAlignment="Center">
+
+					<Button 
+						Content="Exit" 
+						Click="ExitSetup"
+						VerticalAlignment="Top"
+						Style="{StaticResource Large}" />
+
+					<TextBlock 
+						Text=" or " 
+						VerticalAlignment="Top"
+						Style="{StaticResource LargeText}" />
+
+					<Button 
+						DockPanel.Dock="Top"
+						Content="Exit &amp; Launch" 
+						Click="LaunchAndExit"
+						VerticalAlignment="Top"
+						Style="{StaticResource Large}" />
+
+				</StackPanel>
 			</DockPanel>
 		</Grid>
 	</Border>
