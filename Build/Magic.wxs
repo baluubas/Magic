@@ -30,6 +30,7 @@
             <File Id="ThreadingTasks" Source="bin\Microsoft.Threading.Tasks.dll"/>
             <File Id="StructureMap" Source="bin\StructureMap.dll"/>
             <File Id="SystemRuntime" Source="bin\System.Runtime.dll"/>
+            <File Id="SystemThreadingTasks" Source="bin\System.Threading.Tasks.dll"/>
             <File Id="SystemWindowsShell" Source="bin\Microsoft.Windows.Shell.dll"/>
             <File Id="WindowsInteractivity" Source="bin\System.Windows.Interactivity.dll"/>
           </Component>

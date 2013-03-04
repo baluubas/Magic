@@ -75,7 +75,7 @@
 				<ProgressBar
 					VerticalAlignment="Top"
 					x:Name="Progress"
-					Width="300"
+					Width="250"
 					Height="10"
 					Margin="0,180,0,0"
 					IsIndeterminate="True"

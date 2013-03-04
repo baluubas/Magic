@@ -39,25 +39,27 @@ namespace Magic.Imaging
 
 		public Task<PdfPage[]> GetPdfPages(IProgress<PdfPage> loadPagesProgress = null)
 		{
-			return Task.Factory.StartNew(async () =>
+			return GetPdfPage(loadPagesProgress);
+		}
+
+		private async Task<PdfPage[]> GetPdfPage(IProgress<PdfPage> loadPagesProgress)
+		{
+			var result = new List<PdfPage>();
+
+			foreach (var sourcePdf in _sourcePdfs)
 			{
-				var result = new List<PdfPage>();
+				IEnumerable<PdfPage> pages = await sourcePdf.GetPagesAsync();
 
-				foreach (var sourcePdf in _sourcePdfs)
+				foreach (var pdfPage in pages)
 				{
-					IEnumerable<PdfPage> pages = await sourcePdf.GetPagesAsync();
+					result.Add(pdfPage);
 
-					foreach (var pdfPage in pages)
-					{
-						result.Add(pdfPage);
-
-						if(loadPagesProgress != null)
-							loadPagesProgress.Report(pdfPage);
-					}
+					if (loadPagesProgress != null)
+						loadPagesProgress.Report(pdfPage);
 				}
+			}
 
-				return result.ToArray();
-			}).Unwrap();
+			return result.ToArray();
 		}
 
 		public void Dispose()
