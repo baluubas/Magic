@@ -25,12 +25,12 @@
             <File Id="iTextSharp" Source="bin\itextsharp.dll"/>
             <File Id="App" Source="bin\Magic.exe" />
             <File Id="AppConfig" Source="bin\Magic.exe.config"/>
+            <File Id="AsyncTargetingPack" Source="bin\Microsoft.CompilerServices.AsyncTargetingPack.Net4.dll"/>
             <File Id="ExpressionDrawing" Source="bin\Microsoft.Expression.Drawing.dll"/>
             <File Id="ExpressionDrawingInteractions" Source="bin\Microsoft.Expression.Interactions.dll"/>
             <File Id="ThreadingTasks" Source="bin\Microsoft.Threading.Tasks.dll"/>
             <File Id="StructureMap" Source="bin\StructureMap.dll"/>
             <File Id="SystemRuntime" Source="bin\System.Runtime.dll"/>
-            <File Id="SystemThreadingTasks" Source="bin\System.Threading.Tasks.dll"/>
             <File Id="SystemWindowsShell" Source="bin\Microsoft.Windows.Shell.dll"/>
             <File Id="WindowsInteractivity" Source="bin\System.Windows.Interactivity.dll"/>
           </Component>
