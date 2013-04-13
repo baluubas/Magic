@@ -15,7 +15,7 @@ namespace Magic
 
 		private void LogError(Exception exception)
 		{
-			var installDir = new DirectoryInfo(Assembly.GetEntryAssembly().Location).FullName;
+			var installDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
 			var logFile = Path.Combine(installDir, "Crash.txt");
 			File.WriteAllText(logFile, exception.ToString());
 		}
