@@ -133,7 +133,6 @@
 			x:Name="CompletedPanel" 
 			VerticalAlignment="Center" 
 			HorizontalAlignment="Center"
-			Margin="219,141.486"
 			Visibility="Collapsed">
 
 			<TextBlock 
