@@ -137,7 +137,7 @@
 			Visibility="Collapsed">
 
 			<TextBlock 
-				Text="All DONE - You'll find the stuff on your DESTOP" 
+				Text="All DONE - You'll find the stuff on your DESKTOP" 
 				TextWrapping="Wrap" 
 				Width="300"
 				Style="{StaticResource HeaderStyle}"
