@@ -30,7 +30,7 @@ namespace Magic.UI
 		{
 			_container = container;
 			_messageBus = messageBus;
-			DisplayName = "";
+			DisplayName = "Magic";
  
 			_messageBus.Subscribe(this);
 
