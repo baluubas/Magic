@@ -32,6 +32,7 @@
 				Grid.Row="1"
 				Background="#202020"
 				VerticalScrollBarVisibility="Disabled" 
+                HorizontalScrollBarVisibility="Auto"
 				HorizontalContentAlignment="Center">
 
 			<ItemsControl ItemsSource="{Binding Drawings}" >
