@@ -191,7 +191,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="en\Elysium.chm" />
     <Resource Include="Fonts\segoeuil.ttf" />
     <Resource Include="Fonts\seguili.ttf" />
     <Resource Include="Fonts\seguisb.ttf" />
@@ -202,7 +201,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="ru\Elysium.chm" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -213,11 +211,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="appicon.ico" />
-    <Resource Include="en\Elysium.xml" />
-    <Resource Include="en\Microsoft.Expression.Drawing.xml" />
     <Resource Include="Microsoft.Expression.Drawing.xml" />
     <Resource Include="Microsoft.Windows.Shell.xml" />
-    <Resource Include="ru\Elysium.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\fontawesome-webfont.ttf" />
