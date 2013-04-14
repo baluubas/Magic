@@ -73,12 +73,15 @@ namespace Magic.Imaging
 
 		private async Task<RelativeSelection> GetTrimmedSelection()
 		{
-			using (var largeThumb = await _page.GenerateThumbnail())
+			using (var largeThumb = await _page.RenderImage(1))
 			{
 				using (var bitmap = new Bitmap(largeThumb.FileName))
 				{
-					// TODO: Do the actual calculations.
-					return _selection;		
+				    var mbb = new MinimumBoundingBox(bitmap);
+
+				    Rectangle rect = _selection.ToPixelsFromActualImage(bitmap.Height, bitmap.Width);
+                    var minimumRect = mbb.Find(rect);
+				    return _selection.ResizeInPixels(rect, minimumRect);
 				}
 			}
 		}

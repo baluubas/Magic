@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows;
 
 namespace Magic.Imaging
 {
@@ -51,5 +53,28 @@ namespace Magic.Imaging
 			var ratioY = maxDimension.Height / (_pageDimensions.Height * RelativeHeight);
 			return Math.Min(ratioX, ratioY);
 		}
+
+        public Rectangle ToPixelsFromActualImage(int height, int width)
+	    {
+	        return new Rectangle(
+	            (int)(width*RelativeOffsetX),
+                (int)(height * RelativeOffsetY),
+                (int)(width * RelativeWidth),
+                (int)(height * RelativeHeight));
+	    }
+
+	    public RelativeSelection ResizeInPixels(Rectangle rect, Rectangle minimumRect)
+	    {
+            double changeX = (double)minimumRect.X / rect.X;
+            double changeY = (double)minimumRect.Y / rect.Y;
+	        double changeWidth =  (double)minimumRect.Width / rect.Width;
+            double changeHeight = (double)minimumRect.Height / rect.Height;
+
+	        return new RelativeSelection(_pageDimensions,
+                RelativeOffsetX * changeX,
+                RelativeOffsetY * changeY,
+                RelativeWidth * changeWidth,
+                RelativeHeight * changeHeight);
+	    }
 	}
 }

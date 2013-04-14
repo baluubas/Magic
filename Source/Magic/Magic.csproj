@@ -100,6 +100,7 @@
     <Compile Include="Imaging\GhostScript\GhostscriptSettings.cs" />
     <Compile Include="Imaging\GhostScript\GhostscriptWrapper.cs" />
     <Compile Include="Imaging\IPdfRasterizer.cs" />
+    <Compile Include="Imaging\MinimumBoundingBox.cs" />
     <Compile Include="Imaging\OhimImageOutputSettingses.cs" />
     <Compile Include="Imaging\PageThumbnailSetting.cs" />
     <Compile Include="Imaging\PdfFile.cs" />
